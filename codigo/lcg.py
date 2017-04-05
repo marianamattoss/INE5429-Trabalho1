@@ -33,6 +33,9 @@ class LCG(object):
     
     """
         Metodo utilizado para testar o algoritmo LCG.
+        Como exemplo, utilizei os valores:
+        semente = 74573,
+        m =  
     """
     def teste(self):
         return self.gerador(74573, m, a, c)
