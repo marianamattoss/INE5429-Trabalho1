@@ -13,6 +13,7 @@
     course lectured in Federal University of Santa Catarina.
 
 '''
+import time
 
 class LCG(object):
     """
@@ -29,22 +30,53 @@ class LCG(object):
         Formula do algoritmo LCG para gerar os numeros pseudo-aleatorios.
     """
     def gerador(self, semente, m, a, c):
-        return (a*semente + c) % (m)
+        return (a*semente + c) % (2**m)
     
     """
         Metodo utilizado para testar o algoritmo LCG.
         Como exemplo, utilizei os valores:
         semente = 74573,
-        m =  
+        m =  aos tamanhos especificados no enunciado
+        a =
+        c = 
     """
     def teste(self):
-        return self.gerador(74573, m, a, c)
-    
-    """
-        E importante lembrar as regras:
+        outFile = open("lgc_output.txt", "wb")
         
-        m > 0,
-        0 < a < m,
-        0 <= c < m,
-        0 <= semente < m
+        tamanhos = [40, 56, 80, 128, 168, 224, 256, 512, 1024, 2048, 4096]
+        tabelaDeResultado = []
+        indice = 0;
+        for m in tamanhos:
+            indice += 1
+            tabelaDeResultado.append(self.gerador(16807, m, 1103515245, 12345))
+            print "Para o tamanho m = ", m, " gerou-se o numero ", tabelaDeResultado[indice-1]
+            outFile.write(str(tabelaDeResultado[indice-1]) + "\n")
+        
+        outFile.close()
+        return
+
     """
+        Eh importante lembrar as regras:
+        
+        m > 0, modulo,
+        0 < a < m, multiplicador, 
+        0 <= c < m, incrementador,
+        0 <= semente < m, valor inicial
+        
+        Para o LCG ser um "mixed generator" deve-se respeitar as seguintes regras:
+        'm' e 'c' sao relativamente primos;
+        'a-1' eh divisivel por todos os fatores primos de 'm';
+        'a-1' eh divisivel por 4 se o 'm' tambem for
+    """
+    
+"""
+    Funcao inicial
+"""    
+if __name__ == '__main__':
+    start_time = time.time()
+    lcg = LCG()
+    lcg.teste()
+    print("--- Tempo de execucao: %s segundos ---" % (time.time() - start_time))
+    
+    
+    
