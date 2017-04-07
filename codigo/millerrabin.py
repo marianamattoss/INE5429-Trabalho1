@@ -22,26 +22,53 @@ class Millerrabin(object):
     #   Construtor da classe.
 	#	@param self ponteiro para o objeto
     def __init__(self):
+		self.tamanhos = [40, 56, 80, 128, 168, 224, 256, 512, 1024, 2048, 4096]
         return
 
-    
+	##
+	#	Tenta decompor um numero
+	#	@param self ponteiro para o objeto
+	#	@param a
+	#	@param d
+	#	@param s
+	#	@param numero numero que ira tentar ser decomposto
+    def decompoe(self, a, d, s, numero):
+        if (a**d % numero) == 1:
+            return False
+        for i in range(s):
+            if (a**(2**i * d) % numero) == numero-1:
+                return False
+        return True 
+ 
 	##
 	#	Metodo utilizado para testar a primalidade de um numero.
 	#	@param self ponteiro para o objeto.
 	#	@param numero numero que tera sua primalidade testada.
     def teste(self, numero):
-        outFile = open("rabin_output.txt", "wb")
-        
-        tamanhos = [40, 56, 80, 128, 168, 224, 256, 512, 1024, 2048, 4096]
-        tabelaDeResultado = []
-        indice = 0;
-        for m in tamanhos:
-            indice += 1
-            tabelaDeResultado.append(self.gerador(m))
-            print "Para o tamanho m = ", m, " gerou-se o numero ", tabelaDeResultado[indice-1]
-            outFile.write(str(tabelaDeResultado[indice-1]) + "\n")
-        
-        outFile.close()
+        # Verifica se o numero e par
+        if num % 2 == 0:
+            if num == 2:
+                return True
+            return False
+
+        # caso num não seja primo
+        # descoberta dos valores de s e d
+        s = 0
+        d = num-1
+        while True:
+            quociente, resto = divmod(d, 2)
+            if resto == 1:
+                break
+            s += 1
+            d = quociente
+        assert(2**s * d == numero-1)
+ 
+        for i in range(self.i):
+            a = random.randrange(2, numero)
+            if self.decompoe(a, d, s, numero):
+                return False
+ 
+        return True 
         return 
 
 ##
