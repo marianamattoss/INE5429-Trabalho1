@@ -23,22 +23,24 @@ class LCG(object):
     """
         Construtor da classe.
     """
-    def __init__(self):
+    def __init__(self, semente):
+        self.semente = semente
         return
     
     """
         Formula do algoritmo LCG para gerar os numeros pseudo-aleatorios.
     """
-    def gerador(self, semente, m, a, c):
-        return (a*semente + c) % (2**m)
+    def gerador(self, m, a, c):
+        self.semente = (a*self.semente + c) % (2**m)
+        return self.semente
     
     """
         Metodo utilizado para testar o algoritmo LCG.
         Como exemplo, utilizei os valores:
         semente = 74573,
-        m =  aos tamanhos especificados no enunciado
-        a =
-        c = 
+        m = aos tamanhos especificados no enunciado
+        a = 1103515245
+        c = 12345
     """
     def teste(self):
         outFile = open("lgc_output.txt", "wb")
@@ -48,7 +50,7 @@ class LCG(object):
         indice = 0;
         for m in tamanhos:
             indice += 1
-            tabelaDeResultado.append(self.gerador(16807, m, 1103515245, 12345))
+            tabelaDeResultado.append(self.gerador(m, 1103515245, 12345))
             print "Para o tamanho m = ", m, " gerou-se o numero ", tabelaDeResultado[indice-1]
             outFile.write(str(tabelaDeResultado[indice-1]) + "\n")
         
@@ -74,7 +76,7 @@ class LCG(object):
 """    
 if __name__ == '__main__':
     start_time = time.time()
-    lcg = LCG()
+    lcg = LCG(74573)
     lcg.teste()
     print("--- Tempo de execucao: %s segundos ---" % (time.time() - start_time))
     
