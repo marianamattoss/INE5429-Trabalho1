@@ -1,9 +1,9 @@
-##	@package blumblumshub
+##	@package millerrabin
 #        ================================================
 #            FEDERAL UNIVERSITY OF SANTA CATARINA
 #        ================================================
 #    
-#    File: ~/codigo/blumblumshub.py
+#    File: ~/codigo/millerrabin.py
 #    Created on 4 de abr de 2017 
 #    @author:  Rodrigo Pedro Marques
 #    GitHub: https://github.com/rodrigo93/INE5429-Trabalho1
@@ -14,32 +14,23 @@
 import time
 
 ##
-#	Blum Blum Shub e um algoritmo gerador de numeros pseudo-aleatorios.
-class BBS(object):
+#    Miller Rabin e um algoritmo para realizar a verificacao da primalidade de um dado numero.
+class Millerrabin(object):
+
+    
+    ##
+    #   Construtor da classe.
+	#	@param self ponteiro para o objeto
+    def __init__(self):
+        return
 
     
 	##
-	#	Construtor da classe.
+	#	Metodo utilizado para testar a primalidade de um numero.
 	#	@param self ponteiro para o objeto.
-	#	@param semente valor que sera atribuido a semente do algoritmo.
-    def __init__(self, semente):
-        self.seed = semente
-        return
-    
-	##
-	#	Formula do algoritmo BBS para gerar os numeros pseudo-aleatorios.
-	#	@param self ponteiro do objeto
-	#	@param m valor do modulo que ira limitar o tamanho do numero gerado
-	#	@return	numero pseudo-aleatorio gerado
-    def gerador(self, m):
-        self.seed = (self.seed**2) % (2**m)
-        return self.seed
-    
-	##
-	#	Metodo utilizado para testar o algoritmo Blum Blum Shub.
-	#	@param self ponteiro para o objeto
-    def teste(self):
-        outFile = open("bbs_output.txt", "wb")
+	#	@param numero numero que tera sua primalidade testada.
+    def teste(self, numero):
+        outFile = open("rabin_output.txt", "wb")
         
         tamanhos = [40, 56, 80, 128, 168, 224, 256, 512, 1024, 2048, 4096]
         tabelaDeResultado = []
@@ -54,9 +45,9 @@ class BBS(object):
         return 
 
 ##
-#	Funcao inicial    
+#	Funcao inicial.
 if __name__ == '__main__':
     start_time = time.time()
-    bbs = BBS(88667)
-    bbs.teste()
+    rabin = Millerrabin()
+    rabin.teste()
     print("--- Tempo de execucao: %s segundos ---" % (time.time() - start_time))

@@ -1,47 +1,49 @@
-'''
-        ================================================
-            FEDERAL UNIVERSITY OF SANTA CATARINA
-        ================================================
-    
-    File: ~/codigo/lcg.py
-    Created on 4 de abr de 2017 
-    @author:  Rodrigo Pedro Marques
-    GitHub: https://github.com/rodrigo93/INE5429-Trabalho1
-    Professor: Renato Felipe Custodio
- 
-    This file is part of a college project for the INE5429 Computer Security
-    course lectured in Federal University of Santa Catarina.
-
-'''
+##	@package lcg
+#        ================================================
+#            FEDERAL UNIVERSITY OF SANTA CATARINA
+#        ================================================
+#    
+#    File: ~/codigo/lcg.py
+#    Created on 4 de abr de 2017 
+#    @author:  Rodrigo Pedro Marques
+#    GitHub: https://github.com/rodrigo93/INE5429-Trabalho1
+#    Professor: Renato Felipe Custodio
+# 
+#    This file is part of a college project for the INE5429 Computer Security
+#    course lectured in Federal University of Santa Catarina.
 import time
 
+
+##
+#	Linear Congruential Generator e um algoritmo gerador de numeros pseudo-aleatorios.
 class LCG(object):
-    """
-        Linear Congruential Generator e um algoritmo gerador de numeros pseudo-aleatorios.
-    """
-    
-    """
-        Construtor da classe.
-    """
+
+	##
+	#	Construtor da classe.
+	#	@param self ponteiro do objeto.
+	#	@param semente valor inicial atribuido a semente do algoritmo
     def __init__(self, semente):
         self.semente = semente
         return
     
-    """
-        Formula do algoritmo LCG para gerar os numeros pseudo-aleatorios.
-    """
+	##
+	#	Formula do algoritmo LCG para gerar os numeros pseudo-aleatorios.
+	#	@param self ponteiro do objeto.
+	#	@param m valor do modulo que ira limitar o tamanho do numero gerado.
+	#	@param a multiplicador.
+	#	@param c incrementador.
+	#	@return valor pseudo-aleatorio gerado.
     def gerador(self, m, a, c):
         self.semente = (a*self.semente + c) % (2**m)
         return self.semente
     
-    """
-        Metodo utilizado para testar o algoritmo LCG.
-        Como exemplo, utilizei os valores:
-        semente = 74573,
-        m = aos tamanhos especificados no enunciado
-        a = 1103515245
-        c = 12345
-    """
+	##
+	#	Metodo utilizado para testar o algoritmo LCG.
+	#	Como exemplo, utilizei os valores:
+	#	semente = 74573,
+	#	m = aos tamanhos especificados no enunciado
+	#	a = 1103515245
+    #   c = 12345
     def teste(self):
         outFile = open("lgc_output.txt", "wb")
         
@@ -71,9 +73,8 @@ class LCG(object):
         'a-1' eh divisivel por 4 se o 'm' tambem for
     """
     
-"""
-    Funcao inicial
-"""    
+##
+#	Funcao inicial.   
 if __name__ == '__main__':
     start_time = time.time()
     lcg = LCG(74573)
