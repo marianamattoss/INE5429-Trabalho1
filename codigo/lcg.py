@@ -81,5 +81,11 @@ if __name__ == '__main__':
     lcg.teste()
     print("--- Tempo de execucao: %s segundos ---" % (time.time() - start_time))
     
-    
+"""
+	--- Tempo de execucao: 0.000304937362671 segundos ---
+	--- Tempo de execucao: 0.000277996063232 segundos ---
+	--- Tempo de execucao: 0.000491857528687 segundos ---
+	--- Tempo de execucao: 0.000478029251099 segundos ---
+	--- Tempo de execucao: 0.000275850296021 segundos ---
+"""    
     

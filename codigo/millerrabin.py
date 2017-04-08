@@ -12,6 +12,7 @@
 #    This file is part of a college project for the INE5429 Computer Security
 #    course lectured in Federal University of Santa Catarina.
 import time
+import random
 
 ##
 #    Miller Rabin e um algoritmo para realizar a verificacao da primalidade de um dado numero.
@@ -19,42 +20,43 @@ class Millerrabin(object):
 
     
     ##
-    #   Construtor da classe.
-	#	@param self ponteiro para o objeto
-    def __init__(self):
-		self.tamanhos = [40, 56, 80, 128, 168, 224, 256, 512, 1024, 2048, 4096]
+    #    Construtor da classe.
+    #    @param self ponteiro para o objeto
+    #    @param it iteracoes que o algoritmo ira realizar
+    def __init__(self, it):
+        self.iteracoes = it
         return
 
-	##
-	#	Tenta decompor um numero
-	#	@param self ponteiro para o objeto
-	#	@param a
-	#	@param d
-	#	@param s
-	#	@param numero numero que ira tentar ser decomposto
+    ##
+    #	Testa a base 'a' para verificar se 'a' eh um candidato para a composicao de 'numero'
+    #	@param self ponteiro para o objeto
+    #	@param a numero aleatorio dentro do intervalor 1 <= a <= n-1
+    #	@param d valor de d
+    #	@param s valor de s
+    #	@param numero numero que ira tentar ser decomposto
     def decompoe(self, a, d, s, numero):
-        if (a**d % numero) == 1:
+        if pow(a, d, numero) == 1:
             return False
         for i in range(s):
-            if (a**(2**i * d) % numero) == numero-1:
+            if pow(a, 2**i * d, numero) == numero-1:
                 return False
         return True 
  
-	##
-	#	Metodo utilizado para testar a primalidade de um numero.
-	#	@param self ponteiro para o objeto.
-	#	@param numero numero que tera sua primalidade testada.
+    ##
+    #	Metodo utilizado para testar a primalidade de um numero.
+    #	@param self ponteiro para o objeto.
+    #	@param numero numero que tera sua primalidade testada.
     def teste(self, numero):
         # Verifica se o numero e par
-        if num % 2 == 0:
-            if num == 2:
+        if numero % 2 == 0:
+            if numero == 2:
                 return True
             return False
 
-        # caso num não seja primo
+        # caso num nao seja primo
         # descoberta dos valores de s e d
         s = 0
-        d = num-1
+        d = numero-1
         while True:
             quociente, resto = divmod(d, 2)
             if resto == 1:
@@ -63,7 +65,7 @@ class Millerrabin(object):
             d = quociente
         assert(2**s * d == numero-1)
  
-        for i in range(self.i):
+        for it in range(self.iteracoes):
             a = random.randrange(2, numero)
             if self.decompoe(a, d, s, numero):
                 return False
@@ -74,7 +76,11 @@ class Millerrabin(object):
 ##
 #	Funcao inicial.
 if __name__ == '__main__':
+    numeroPrimo = 88747
     start_time = time.time()
-    rabin = Millerrabin()
-    rabin.teste()
+    rabin = Millerrabin(50)
+    if rabin.teste(numeroPrimo):
+        print "O numero ", numeroPrimo, " eh um candidato a numero primo."
+    else:
+        print "O numero ", numeroPrimo, " nao eh primo."
     print("--- Tempo de execucao: %s segundos ---" % (time.time() - start_time))
