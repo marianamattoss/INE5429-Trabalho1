@@ -11,8 +11,7 @@
 # 
 #    This file is part of a college project for the INE5429 Computer Security
 #    course lectured in Federal University of Santa Catarina.
-
-import time
+import random
 
 ##
 #    Fermat e um algoritmo para realizar a verificacao da primalidade de um dado numero.
@@ -20,42 +19,40 @@ import time
 class Fermat(object):
     
     ##
-    #   Construtor da classe.
-	#	@param self ponteiro do objeto
-    def __init__(self):
+    #    Construtor da classe.
+    #    @param self ponteiro do objeto
+    #    @param it numero de iteracoes que serao realizadas
+    def __init__(self, it):
+        self.iteracoes = it
         return
     
     ##
     #   Formula do algoritmo BBS para gerar os numeros pseudo-aleatorios.
     #   
-    def gerador(self, m):
-        self.seed = (self.seed**2) % (2**m)
-        return self.seed
-    
-    ##
-    #   Metodo utilizado para testar a primalidade de um numero.
-	#	@param self ponteiro do objeto.
-	#	@param numero numero que tera sua primalidade testada.
     def teste(self, numero):
-        outFile = open("rabin_output.txt", "wb")
-        
-        tamanhos = [40, 56, 80, 128, 168, 224, 256, 512, 1024, 2048, 4096]
-        tabelaDeResultado = []
-        indice = 0;
-        for m in tamanhos:
-            indice += 1
-            tabelaDeResultado.append(self.gerador(m))
-            print "Para o tamanho m = ", m, " gerou-se o numero ", tabelaDeResultado[indice-1]
-            outFile.write(str(tabelaDeResultado[indice-1]) + "\n")
-        
-        outFile.close()
-        return 
+        if numero == 2:
+            return True
+    
+        if numero % 2 == 0:
+            return False
+    
+        for it in xrange(self.iteracoes):
+            a = random.randint(1, numero-1)
+    
+            if pow(a, numero-1) % numero != 1:
+                return False
+        return True
 
+"""
 ##
 #    Funcao inicial.
 #   
 if __name__ == '__main__':
-    start_time = time.time()
-    fermat = Fermat()
-    fermat.teste()
-    print("--- Tempo de execucao: %s segundos ---" % (time.time() - start_time))
+    fermat = Fermat(50)
+    numero = 88666
+    if fermat.teste(numero):
+        print "O numero ", numero, " provavelmente eh primo."
+    else:
+        print "O numero ", numero, " nao eh primo."
+
+"""

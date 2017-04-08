@@ -52,7 +52,7 @@ class BBS(object):
         
         outFile.close()
         return 
-
+"""
 ##
 #	Funcao inicial    
 if __name__ == '__main__':
@@ -61,11 +61,11 @@ if __name__ == '__main__':
     bbs.teste()
     print("--- Tempo de execucao: %s segundos ---" % (time.time() - start_time))
     
-"""
     Tempos de execucao:
     --- Tempo de execucao: 0.000319957733154 segundos ---
     --- Tempo de execucao: 0.000370025634766 segundos ---
     --- Tempo de execucao: 0.000658988952637 segundos ---
     --- Tempo de execucao: 0.000383853912354 segundos ---
     --- Tempo de execucao: 0.000336885452271 segundos ---
-"""    
+    
+"""
