@@ -65,22 +65,11 @@ class Millerrabin(object):
             d = quociente
         assert(2**s * d == numero-1)
  
-        for it in range(self.iteracoes):
+        for it in xrange(self.iteracoes):
             a = random.randrange(2, numero)
             if self.decompoe(a, d, s, numero):
                 return False
- 
+            
         return True 
         return 
 
-##
-#	Funcao inicial.
-if __name__ == '__main__':
-    numeroPrimo = 88747
-    start_time = time.time()
-    rabin = Millerrabin(50)
-    if rabin.teste(numeroPrimo):
-        print "O numero ", numeroPrimo, " eh um candidato a numero primo."
-    else:
-        print "O numero ", numeroPrimo, " nao eh primo."
-    print("--- Tempo de execucao: %s segundos ---" % (time.time() - start_time))

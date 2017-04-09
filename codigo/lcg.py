@@ -59,34 +59,3 @@ class LCG(object):
         outFile.close()
         return
 
-    """
-        Eh importante lembrar as regras:
-        
-        m > 0, modulo,
-        0 < a < m, multiplicador, 
-        0 <= c < m, incrementador,
-        0 <= semente < m, valor inicial
-        
-        Para o LCG ser um "mixed generator" deve-se respeitar as seguintes regras:
-        'm' e 'c' sao relativamente primos;
-        'a-1' eh divisivel por todos os fatores primos de 'm';
-        'a-1' eh divisivel por 4 se o 'm' tambem for
-    """
-
-"""    
-##
-#	Funcao inicial.   
-if __name__ == '__main__':
-    start_time = time.time()
-    lcg = LCG(74573)
-    lcg.teste()
-    print("--- Tempo de execucao: %s segundos ---" % (time.time() - start_time))
-    
-
-	--- Tempo de execucao: 0.000304937362671 segundos ---
-	--- Tempo de execucao: 0.000277996063232 segundos ---
-	--- Tempo de execucao: 0.000491857528687 segundos ---
-	--- Tempo de execucao: 0.000478029251099 segundos ---
-	--- Tempo de execucao: 0.000275850296021 segundos ---
- 
-""" 

@@ -38,21 +38,4 @@ class Fermat(object):
     
         for it in xrange(self.iteracoes):
             a = random.randint(1, numero-1)
-    
-            if pow(a, numero-1) % numero != 1:
-                return False
-        return True
-
-"""
-##
-#    Funcao inicial.
-#   
-if __name__ == '__main__':
-    fermat = Fermat(50)
-    numero = 88666
-    if fermat.teste(numero):
-        print "O numero ", numero, " provavelmente eh primo."
-    else:
-        print "O numero ", numero, " nao eh primo."
-
-"""
+            return pow(a, numero-1, numero) == 1
